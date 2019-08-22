@@ -21,32 +21,29 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 imgPath = 'c:\\Users\\prip\\Documents\\Sean\\vscode\\python\\NTHU\\DL\\output'
-COLOR = 'white'
-
-# plt.rcParams['axes.labelcolor'] = COLOR
-# plt.rcParams['xtick.color'] = COLOR
-# plt.rcParams['ytick.color'] = COLOR
+plt.rcParams["figure.figsize"] = (80,80)
 sns.set(style='whitegrid')
 # sns.reset_orig()
 sns.pairplot(df, hue="Class label", size=2.5)
-# plt.tight_layout()
-plt.rcParams['text.color'] = COLOR
+plt.tight_layout()
+
 # print(os.getcwd())
 if not os.path.exists(imgPath):
     os.makedirs(imgPath)
-plt.savefig(os.path.join(imgPath, "fig-wine-scatter.png"), dpi=300)
+# plt.savefig(os.path.join(imgPath, "fig-wine-scatter.png"), dpi=300)
 plt.show()
 #%%
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-
+plt.rcParams["figure.figsize"] = (18,18)
+plt.rcParams["xtick.labelsize"]=20
+plt.rcParams["ytick.labelsize"]=20
 #Z-normalize data
 sc = StandardScaler()
 Z = sc.fit_transform(x)
 #Estimate the correlation matrix
 R = np.dot(Z.T, Z) / df.shape[0]
 
-sns.set(font_scale = 1.0)
 
 ticklabels = [ s for s in x.columns ]
 
@@ -57,10 +54,39 @@ hm = sns.heatmap(R,
                 xticklabels = ticklabels)
 
 plt.tight_layout()
-plt.savefig(os.path.join(imgPath, "fit-wine-corr.png"), dpi=300)
+# plt.savefig(os.path.join(imgPath, "fit-wine-corr.png"), dpi=300)
 plt.show()
 
-sns.reset_orig()
-#%%
 
+#%%
+def xticklabels_example():
+    fig = plt.figure() 
+
+    x = np.arange(20)
+    y1 = np.cos(x)
+    y2 = (x**2)
+    y3 = (x**3)
+    yn = (y1,y2,y3)
+    COLORS = ('b','g','k')
+
+    for i,y in enumerate(yn):
+        ax = fig.add_subplot(len(yn),1,i+1)
+
+        ax.plot(x, y, ls='solid', color=COLORS[i]) 
+
+        if i != len(yn) - 1:
+            # all but last 
+            ax.set_xticklabels( () )
+        else:
+            for tick in ax.xaxis.get_major_ticks():
+                tick.label.set_fontsize(20) 
+                # specify integer or one of preset strings, e.g.
+                #tick.label.set_fontsize('x-small') 
+                tick.label.set_rotation('vertical')
+
+    fig.suptitle('Matplotlib xticklabels Example')
+    plt.show()
+
+if __name__ == '__main__':
+    xticklabels_example()
 #%%

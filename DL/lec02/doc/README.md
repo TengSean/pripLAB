@@ -27,19 +27,55 @@ $$
 
 >**Note i.i.d. Indenpent and identically distribution (獨立同分布)**
 >意即抽樣到的data distribution一模一樣且互相獨立，所謂一模一樣就是population的參數都一樣。
+___
+##相關係數與散布圖
 
->**Note 相關係數與散布圖**
->
-><img src="./img/corr01.png" alt="drawing"
+<img src="./img/corr01.png" alt="drawing"
         style="width:500px;display:block;
                 margin-left: auto;
                 margin-right: auto;"/>
->r值介於-1與1之間，如圖一兩變數呈現左下右上的趨勢時，則兩變數之間存在正相關，其相關係數>0;若散佈程度坐上右下時，其相關係數<0;若散佈程度**非線性**或不規則狀，則其係數趨近於零。
->正負相關又可表示為完全正、負相關與不完全正、負相關，
->|1|12|2|
->
+r值介於-1與1之間，如圖一兩變數呈現左下右上的趨勢時，則兩變數之間存在正相關，其相關係數>0;若散佈程度坐上右下時，其相關係數<0;若散佈程度**非線性**或不規則狀，則其係數趨近於零。
+正負相關又可表示為完全正、負相關與不完全正、負相關，
+___
+##幾何學角度的解釋
+<img src="./img/triangle.png" alt="drawing"
+        style="width:180px;display:block"
+        align='right'>
+對於沒有**中心化**的數據，相關係數與兩條可
+能的回歸線$y=g_{x}(x)$和$x=g_{y}(y)$夾角的
+餘弦值一致。
 
+>**餘弦定理**$$c^2 = a^2 + b^2 - 2ab\cos \gamma$$
+
+<img src="./img/corr_regression.png" alt="drawing"
+        style="width:220px;display:block"
+        align='right'>
+
+對於中心化過的數據(樣本平均為0)，相關係數
+可以被視作由兩個隨機變量向量夾角$\theta$的餘弦值
+例如:有五格國家的國民生產總值分別為:10、20
+、30、50和80億美元。假設這五個國家的貧困
+百分比分別為11%、12%、13%、15%和18%。
+令x和y分別等於包含上述五個數據的向量
+
+$x=(1,2,3,5,8)$
+$y=(0.11,0.12,0.13,0.15,0.18)$
+
+利用通常的方法計算兩向量的夾角$\theta$，為中心化係數為:
+$$
+\cos \theta = \frac {x \cdot y} {\lvert\lvert{x}\rvert\rvert\lvert\lvert{y}\rvert\rvert}=\frac{2.93}{\sqrt{103} \sqrt{0.0983}} = 0.920814711.
+$$
+以上數據為完全相關。但如果將數據中心化基於$E(x)=3.8$移動$x$ 、$E(y)$移動$y$。
+
+$x=(-2.8,-1.8,-0.8,1.2,4.2)$
+$y=(-0.028,-0.018,-0.008,0.012,0.042)$
+
+$$
+\cos \theta = \frac {x \cdot y} {\lvert\lvert{x}\rvert\rvert\lvert\lvert{y}\rvert\rvert}=\frac {0.0308}{\sqrt{30.8} \sqrt{0.00308}} = 1 = \rho_{xy}.
+$$
+___
 ##Z-normalize
+
 
 
 
