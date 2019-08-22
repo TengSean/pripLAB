@@ -32,6 +32,7 @@ if not os.path.exists(imgPath):
     os.makedirs(imgPath)
 # plt.savefig(os.path.join(imgPath, "fig-wine-scatter.png"), dpi=300)
 plt.show()
+
 #%%
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -41,7 +42,9 @@ plt.rcParams["ytick.labelsize"]=20
 #Z-normalize data
 sc = StandardScaler()
 Z = sc.fit_transform(x)
-#Estimate the correlation matrix
+z = sc.fit(x)
+#*Estimate the correlation matrix
+#!z-normalize後的data，其相關係數等於餘弦夾角。
 R = np.dot(Z.T, Z) / df.shape[0]
 
 
