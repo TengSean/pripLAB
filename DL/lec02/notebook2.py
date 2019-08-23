@@ -24,7 +24,7 @@ imgPath = 'c:\\Users\\prip\\Documents\\Sean\\vscode\\python\\NTHU\\DL\\output'
 plt.rcParams["figure.figsize"] = (80,80)
 sns.set(style='whitegrid')
 # sns.reset_orig()
-sns.pairplot(df, hue="Class label", size=2.5)
+# sns.pairplot(df, hue="Class label", size=2.5)
 plt.tight_layout()
 
 # print(os.getcwd())
@@ -50,46 +50,31 @@ R = np.dot(Z.T, Z) / df.shape[0]
 
 ticklabels = [ s for s in x.columns ]
 
-hm = sns.heatmap(R,
-                cbar = True,
-                square = True,
-                yticklabels = ticklabels,
-                xticklabels = ticklabels)
+# hm = sns.heatmap(R,
+                # cbar = True,
+                # square = True,
+                # yticklabels = ticklabels,
+                # xticklabels = ticklabels)
 
 plt.tight_layout()
 # plt.savefig(os.path.join(imgPath, "fit-wine-corr.png"), dpi=300)
 plt.show()
-
-
 #%%
-def xticklabels_example():
-    fig = plt.figure() 
 
-    x = np.arange(20)
-    y1 = np.cos(x)
-    y2 = (x**2)
-    y3 = (x**3)
-    yn = (y1,y2,y3)
-    COLORS = ('b','g','k')
+eign_vals, eign_vecs = np.linalg.eigh(R)
+print("\nEignevalues: \n%s" %eign_vals)
+#%%
 
-    for i,y in enumerate(yn):
-        ax = fig.add_subplot(len(yn),1,i+1)
+import matplotlib.pyplot as plt
 
-        ax.plot(x, y, ls='solid', color=COLORS[i]) 
+tot = sum(np.abs(eign_vals))
+var_exp  =[(i / tot) for i in sorted(np.abs(np.abs(eign_vals)), reverse=True)]
+# ?np.cumsum
+# ?累加函數
+cum_var_exp = np.cumsum(var_exp)
 
-        if i != len(yn) - 1:
-            # all but last 
-            ax.set_xticklabels( () )
-        else:
-            for tick in ax.xaxis.get_major_ticks():
-                tick.label.set_fontsize(20) 
-                # specify integer or one of preset strings, e.g.
-                #tick.label.set_fontsize('x-small') 
-                tick.label.set_rotation('vertical')
+print("var_exp: {}, cum_var: {}".format(var_exp, cum_var_exp))
 
-    fig.suptitle('Matplotlib xticklabels Example')
-    plt.show()
 
-if __name__ == '__main__':
-    xticklabels_example()
+
 #%%
