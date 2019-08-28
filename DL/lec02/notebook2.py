@@ -15,7 +15,6 @@ y = df['Class label']
 df.head(5)
 
 #%%
-%time
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -28,14 +27,15 @@ sns.set(style='whitegrid')
 plt.tight_layout()
 
 # print(os.getcwd())
-if not os.path.exists(imgPath):
-    os.makedirs(imgPath)
+# if not os.path.exists(imgPath):
+    # os.makedirs(imgPath)
 # plt.savefig(os.path.join(imgPath, "fig-wine-scatter.png"), dpi=300)
 plt.show()
 
 #%%
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+
 plt.rcParams["figure.figsize"] = (18,18)
 plt.rcParams["xtick.labelsize"]=20
 plt.rcParams["ytick.labelsize"]=20
@@ -61,7 +61,7 @@ plt.tight_layout()
 plt.show()
 #%%
 
-eign_vals, eign_vecs = np.linalg.eigh(R)
+eigen_vals, eigen_vecs = np.linalg.eigh(R)
 print("\nEignevalues: \n%s" %eign_vals)
 #%%
 
@@ -73,8 +73,7 @@ var_exp  =[(i / tot) for i in sorted(np.abs(np.abs(eign_vals)), reverse=True)]
 # ?累加函數
 cum_var_exp = np.cumsum(var_exp)
 
-print("var_exp: {}, cum_var: {}".format(var_exp, cum_var_exp))
-
+plt.bar(range(1, eigen))
 
 
 #%%
